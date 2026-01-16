@@ -19,4 +19,5 @@ if __name__ =="__main__":
         print(f"User: {user}, Permissions: {permissions}")
     
     print("The user role management system is operational.")
+    print("End of the program.")
 
