@@ -112,8 +112,20 @@ h. git stash -u <br>
 i. git stash push -m "message here"<br>
 j. git stash --keep-index
 Notes: If you do not want to commit your code to directory but still save it for future then we use stash. Thus, stashing temporarily shelves your uncommitted changes. a. command stashed the curerent code i.e saves a snapshot of current code and now if you run git status, you will see nothing to commit/stage etc. So current all made chnages are "stashed" but not commited. Suppose you do this multiple times and you want to see list of all such stashes then we use b. command. To go to particular version of code that is stashed we use d. command (if stash id is not specified then the recent most stash is applied). d. id used to delete a recent stash or a specified stash without applying. e. command is used when we want to apply the stash as well as delete it. So as soon as shtash changes are applied, the stash is deleted. f. deleted all the stashes at once without applying any. g. command shows the summary of chnages stored inside recent stash or specified stash. h. command stashes all the untracked files along with the tracked and staged files. As in opposite, j. command stages only the untracked and unstaged files, staged ones containing the chnages are ignored. i. command just labels a stash with the given message. 
+<img width="691" height="169" alt="image" src="https://github.com/user-attachments/assets/239226af-acd9-492b-9b07-e5a1a2586d6d" /><br>
+<img width="661" height="225" alt="image" src="https://github.com/user-attachments/assets/803edca8-789f-4962-b67d-da6d23b6d271" /><br>
+<img width="715" height="429" alt="image" src="https://github.com/user-attachments/assets/7dbf91c0-b031-407b-b5bc-e23a2ff0dd01" /><br>
+<img width="575" height="205" alt="image" src="https://github.com/user-attachments/assets/739999cf-a84a-4fd2-a2dd-4f714fab146a" /><br>
+<img width="521" height="156" alt="image" src="https://github.com/user-attachments/assets/85f5ba3c-9c6e-4fd7-aaa1-42e8386f69a9" /><br>
+<img width="661" height="377" alt="image" src="https://github.com/user-attachments/assets/4d10a475-6ccc-4645-a91e-554871129ae4" /><br>
+<img width="476" height="173" alt="image" src="https://github.com/user-attachments/assets/e9bd57fa-976f-4381-bb36-8ed7ae19afba" /><br>
 
-THE $ Rs
+
+
+
+
+
+THE 4 Rs in git
 (Revert -> REvert to a commit or range of commit without losing the commit history
 Rebase -> Forgot to pull before push or rebase the commit history.
 Restore -> Remove from stating area. Unstage the changes
