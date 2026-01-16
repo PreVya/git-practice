@@ -63,7 +63,13 @@ Notes: Commit history is provided in reverse chronological order(last to first).
 <img width="1066" height="761" alt="image" src="https://github.com/user-attachments/assets/80918c25-4fc5-4611-b3ae-ed36b6581cc8" /><br>
 <img width="1116" height="706" alt="image" src="https://github.com/user-attachments/assets/9c7acc1e-9680-464b-9da5-637405bb47a2" /><br>
 
-11. Reset
+11. Checking out a commit<br>
+Cmd: git show <commit hash><br>
+Notes: Author, date, lines added and deleted line of code, all is shown for the particular commit.<br>
+<img width="615" height="390" alt="image" src="https://github.com/user-attachments/assets/2949707b-2dc7-48e5-aacc-b1ca0c4cb67a" /><br>
+
+
+12. Reset<br>
 Cmd: a. git reset --soft <commit hash> <br>
 b. git reset --hard <commit hash> <br>
 c. git reset <commit hash><br>
@@ -73,13 +79,42 @@ Notes: Reset means moving the HEAD pointer to a previous commit. Moreover, it is
 <img width="810" height="763" alt="image" src="https://github.com/user-attachments/assets/0764531a-c028-4184-97d8-a926bf29dba6" /><br>
 <img width="831" height="811" alt="image" src="https://github.com/user-attachments/assets/193d07d3-dc19-4b49-9402-35d04f833f6b" /><br>
 
+13.Branching
+
+14. Revert.<br>
+Cmd: a. git revert <commit hash><br>
+b. git revert -n <commit hash><br>
+c. git revert --no-edit <commit hash><br>
+d. git revert <commit hash old>..<commit hash new> OR git revert -n <commit hash of old commit>..HEAD <br> 
+e. git revert -m <parent id> <commit hash of merge commit> <br>
+Notes: Git revert is used when you want to have a specific commit version of a code without actually moving the HEAD pointer to the version. So if commits are A->B->C and you want to have commit B version of code then use revert and we get A->B->c-C'. This new commit C' is equivalent to B. It reverses all the changes made in code duing C commit. If commits are A->B->C->D and after D revert command to B is run then commit will be A->B->C->D->D' and this D' will be reverse of B. However, changes in C will sustain coz we wanted reversal to B. Merge conflicts can occur in this case and thus can be resolved maully in editor and then git revert --continue can be used futher to complete the revert process. Also, if you want to revert range of commit like D and C both reverting to B then use the c.) command that reverts all changes of D and C to B creating a new commit CD' (A->B->C->D->CD' where CD' is reverted version of B). -n attribute is to skip the git commit entirely. Revert happens but again after this revert command you have to manually do a git add and git commit and then git push commands to actually create a commit. --no-edit attribute is used when we want to skip the commit message. So by default the commit is done with commit message as "Revert <commit msg of commit which we revert>". If A->B->C and we reverted to B from C using --no-edit, "xyz" being commit message of B then we have A->B->C->C' with commit message of C' as "Revert xyz". -m is used when we have branches. If A->B are commits in main brnach and X->Y are commits in branch named pqr and the merge commit of main and pqr is M, then M has 2 parents B and Y. To revert to any one from M we have to use git show command onto M commit to get the number/ID of the intended parent. Suppose 1 is parent ID of A->B and 2 is of X->Y then git revert -m 1 <hashOfM> reverts it to B while  git revert -m 2 <hashOfM> reverts it to Y. 
 
 
 
 
 
+15. Remove from git directory (local one).<br>
+Cmd:git rm <filename><br>
+Notes: Removes the file from the intitiated git working directory/tree. This file won't be staged/commited and thus not pushed to remote repo.<br>
 
 
+16. Squashing
+    
+17.Stashing <br>
+Cmd: a. git stash<br>
+b. git stash list<br
+c. git stash apply OR git stash apply stash@{n} (n is the ID of stash 1,2,3,4..etc)<br>
+d. git stash drop OR git stash drop stash@{n} (n is ID of stash 1,2,3,4 ... etc) <br>
+e. git stash pop<br>
+f. git stash clear<br>
+g. git stash show OR git stash show stash@{n} <br>
+h. git stash -u <br>
+i. git stash push -m "message here"<br>
+j. git stash --keep-index
+Notes: If you do not want to commit your code to directory but still save it for future then we use stash. Thus, stashing temporarily shelves your uncommitted changes. a. command stashed the curerent code i.e saves a snapshot of current code and now if you run git status, you will see nothing to commit/stage etc. So current all made chnages are "stashed" but not commited. Suppose you do this multiple times and you want to see list of all such stashes then we use b. command. To go to particular version of code that is stashed we use d. command (if stash id is not specified then the recent most stash is applied). d. id used to delete a recent stash or a specified stash without applying. e. command is used when we want to apply the stash as well as delete it. So as soon as shtash changes are applied, the stash is deleted. f. deleted all the stashes at once without applying any. g. command shows the summary of chnages stored inside recent stash or specified stash. h. command stashes all the untracked files along with the tracked and staged files. As in opposite, j. command stages only the untracked and unstaged files, staged ones containing the chnages are ignored. i. command just labels a stash with the given message. 
 
-
-
+THE $ Rs
+(Revert -> REvert to a commit or range of commit without losing the commit history
+Rebase -> Forgot to pull before push or rebase the commit history.
+Restore -> Remove from stating area. Unstage the changes
+Reset-> Reset the commit history and go to desired commit. Also, squash multiple commits to one. History is deleted and prolly as per commands new commit is created)
