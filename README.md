@@ -32,3 +32,28 @@ Notes: "remote" is repository in github. "add" adds a new remote reference. "ori
 Cmd: git push -u origin main<br>
 Notes: -u atribute stands for -upstream. It creates a permanent link between the local git main branch and remote origin repo's main branch. Tells to track all the chnages from local to github repo's branch.<br>
 <img width="683" height="221" alt="image" src="https://github.com/user-attachments/assets/ce2b8b65-16ad-40f4-ade5-3c8d7820c809" /><br>
+
+8. Checking how many files are commmited/un-comittec staged etc. Basically checking ststus of files.<br>
+Cmd: git status<br>
+Notes: States files are chnaged and are not staged for committingor staged but not committed. Also states the files that are "untracked" i.e. these are newly created files/directories and are to be staged and committed.<br>
+<img width="724" height="278" alt="image" src="https://github.com/user-attachments/assets/92a57701-3d49-4c0e-9ab8-44b16ed3b4a3" /><br>
+
+9. Unstaging your changes<br>
+Cmd: git restore --staged <filename> (git restore --staged app.py)<br>
+Notes: We know git add . stages all files for commit. To unstage or remove the file from commiting we can unstage it using this command.<br>
+<img width="688" height="621" alt="image" src="https://github.com/user-attachments/assets/d8e17e87-a9e0-4817-86a1-58d16bd0c11b" /><br>
+
+9. Rebasing on main branch<br>
+Cmd: a. git rebase origin main (does not work if the origin is not upstreamed)<br>
+   b. git rebase origin/main<br>
+   c. git pull --rebase origin main (pulls and rebases in one command)<br>
+Notes: Suppose your commit history is A->B->C. Now on another person's laptop, the git tree looks like A->B (he has not pulled the C commit) and yet maked chnages with commit D. Now when he tries to push, fatal error is seen. To tackle this, we use git rebase. First he runs this command and then pull and then  runs git push. Rebase command takes all the commits that are not pulled (in this case commit C) and updated the local directory to include commit C. Then it puts the further commits onto it (in this case commit D). And then all the commits are pushed. Tree will look like A->B->C->D.  Commit D is rebased to start from commit C instead of commit B.<br>
+<img width="692" height="180" alt="image" src="https://github.com/user-attachments/assets/784eaed0-080c-4b23-9679-d9df798f6329" /><br>
+<img width="663" height="366" alt="image" src="https://github.com/user-attachments/assets/528b3ed0-894e-4aa1-9227-b2962050e402" /><br>
+
+
+
+
+
+
+
