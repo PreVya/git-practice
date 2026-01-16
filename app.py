@@ -1,5 +1,5 @@
 from auth import authenticate
-from users import users
+
 def main():
     print("This is git and github practice.")
     print("Version 1.0.0")
