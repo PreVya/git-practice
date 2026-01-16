@@ -17,4 +17,6 @@ if __name__ =="__main__":
     for user in users:
         permissions = users(user)
         print(f"User: {user}, Permissions: {permissions}")
+    
+    print("The user role management system is operational.")
 
