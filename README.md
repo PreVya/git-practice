@@ -63,6 +63,15 @@ Notes: Commit history is provided in reverse chronological order(last to first).
 <img width="1066" height="761" alt="image" src="https://github.com/user-attachments/assets/80918c25-4fc5-4611-b3ae-ed36b6581cc8" /><br>
 <img width="1116" height="706" alt="image" src="https://github.com/user-attachments/assets/9c7acc1e-9680-464b-9da5-637405bb47a2" /><br>
 
+11. Reset
+Cmd: a. git reset --soft <commit hash> <br>
+b. git reset --hard <commit hash> <br>
+c. git reset <commit hash><br>
+Notes: Reset means moving the HEAD pointer to a previous commit. Moreover, it is powerful when we want to squash many comits into one single commit. --soft reset is sprecually dobe when commit message is to be chnaged - herein the new commit's changes are saved in stage area (local git directory) and thus a new commit can be done along with git oush --force. Suppose commits are A->->B->C (HEAD) - then the directory becomes A->B (HEAD) and C commit is staged. Then once you modify the commit and suppose chnage it to C' and do git push -force the directory become - A->B->C' (HEAD). Simple reset or also termed as mixed reset required you to stage and commit chnages i.e. pointer moves to B and also the changes of commit C becone unstaged. git reset --hard comepletely deleted the C commit from local repo and moves HEAD pointer to previous commit i.e. B. However, the changes in commit C would be completely lost. New changes and new commit can be later done. A->B->C (HEAD) changes to A->B (HEAD) and later if a new commit comes then - A->B->D (HEAD). If chnages are pushed to github then the reset command will have to be followed by either git push --force or git pull --rebase. Else, only HEAD is moved and commits can be modified and then altogether pushed.
+<img width="759" height="342" alt="image" src="https://github.com/user-attachments/assets/415f2258-0616-4d11-b621-70ff57578e49" /><br>
+<img width="536" height="333" alt="image" src="https://github.com/user-attachments/assets/fea446da-583a-4297-a427-ca712d4a750f" /><br>
+
+
 
 
 
