@@ -5,6 +5,7 @@ def main():
 
 if __name__ =="__main__":
     main()
+    users=["admin", "guest", "user"]
     user = "admin"
     login_status = authenticate(user)
     if login_status:
