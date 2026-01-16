@@ -1,4 +1,5 @@
 from auth import authenticate
+from users import users
 def main():
     print("This is git and github practice.")
     print("Version 1.0.0")
@@ -12,5 +13,8 @@ if __name__ =="__main__":
         print(f"User {user} authenticated successfully.")
     else:
         print(f"User {user} failed to authenticate.")
-    print("This is git and github practice.")
+   
+    for user in users:
+        permissions = users(user)
+        print(f"User: {user}, Permissions: {permissions}")
 
