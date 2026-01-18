@@ -40,3 +40,4 @@ if __name__ =="__main__":
     print("Commit D for interactive rebase")
 
     print("Fixup A")
+    print("Fixup B")
