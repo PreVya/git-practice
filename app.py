@@ -1,5 +1,6 @@
 from auth import authenticate
 from users import users
+from admin import admin
 
 def main():
     print("This is git and github practice.")
@@ -18,3 +19,7 @@ if __name__ =="__main__":
     for user in users:
         permissions = users(user)
         print(f"User: {user}, Permissions: {permissions}")
+
+    for user in users:
+        access = admin(user)
+        print(f"User: {user}, Access Level: {access}")
