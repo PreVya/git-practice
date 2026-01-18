@@ -23,4 +23,5 @@ if __name__ =="__main__":
     print("Switched to main branch!")
     print("--- IGNORE ---")
     print("This is to test revert git command")
-    print("Revert 0")
+    print("Revert A")
+    print("Revert B")
