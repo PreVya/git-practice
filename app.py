@@ -1,5 +1,5 @@
 from auth import authenticate
-
+from manage import manage
 def main():
     print("This is git and github practice.")
     print("Version 1.0.0")
@@ -21,3 +21,8 @@ if __name__ =="__main__":
     print("The user role management system is operational.")
     print("End of the program.")
 
+    print("Are you an admin?")
+    if manage(user):
+        print("Access granted to admin features.")
+    else:
+        print("Access denied. Admins only.")
