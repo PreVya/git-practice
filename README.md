@@ -39,7 +39,7 @@ Notes: States files are chnaged and are not staged for committingor staged but n
 <img width="724" height="278" alt="image" src="https://github.com/user-attachments/assets/92a57701-3d49-4c0e-9ab8-44b16ed3b4a3" /><br>
 
 9. Unstaging your changes<br>
-Cmd: git restore --staged <filename> (git restore --staged app.py)<br>
+Cmd: git restore --staged |filename| (git restore --staged app.py)<br>
 Notes: We know git add . stages all files for commit. To unstage or remove the file from commiting we can unstage it using this command.<br>
 <img width="688" height="621" alt="image" src="https://github.com/user-attachments/assets/d8e17e87-a9e0-4817-86a1-58d16bd0c11b" /><br>
 
@@ -64,31 +64,31 @@ Notes: Commit history is provided in reverse chronological order(last to first).
 <img width="1116" height="706" alt="image" src="https://github.com/user-attachments/assets/9c7acc1e-9680-464b-9da5-637405bb47a2" /><br>
 
 11. Checking out a commit<br>
-Cmd: git show <commit hash><br>
+Cmd: git show |commit hash|<br>
 Notes: Author, date, lines added and deleted line of code, all is shown for the particular commit.<br>
 <img width="615" height="390" alt="image" src="https://github.com/user-attachments/assets/2949707b-2dc7-48e5-aacc-b1ca0c4cb67a" /><br>
 
 
 12. Reset<br>
-Cmd: a. git reset --soft <commit hash> <br>
-b. git reset --hard <commit hash> <br>
-c. git reset <commit hash><br>
+Cmd: a. git reset --soft |commit hash| <br>
+b. git reset --hard |commit hash| <br>
+c. git reset |commit hash|<br>
 Notes: Reset means moving the HEAD pointer to a previous commit. Moreover, it is powerful when we want to squash many comits into one single commit(Check point for squashing). --soft reset is sprecually dobe when commit message is to be chnaged - herein the new commit's changes are saved in stage area (local git directory) and thus a new commit can be done along with git oush --force. Suppose commits are A->->B->C (HEAD) - then the directory becomes A->B (HEAD) and C commit is staged. Then once you modify the commit and suppose chnage it to C' and do git push -force the directory become - A->B->C' (HEAD). Simple reset or also termed as mixed reset required you to stage and commit chnages i.e. pointer moves to B and also the changes of commit C becone unstaged. git reset --hard comepletely deleted the C commit from local repo and moves HEAD pointer to previous commit i.e. B. However, the changes in commit C would be completely lost. New changes and new commit can be later done. A->B->C (HEAD) changes to A->B (HEAD) and later if a new commit comes then - A->B->D (HEAD). If chnages are pushed to github then the reset command will have to be followed by either git push --force or git pull --rebase. Else, only HEAD is moved and commits can be modified and then altogether pushed. To conclude reset is used only when we have not pushed code to remote repo/github. But ofc we can handle cases when code is pushed. However, especially in hard reset, a whole commit is lost.
 <img width="759" height="342" alt="image" src="https://github.com/user-attachments/assets/415f2258-0616-4d11-b621-70ff57578e49" /><br>
 <img width="536" height="333" alt="image" src="https://github.com/user-attachments/assets/fea446da-583a-4297-a427-ca712d4a750f" /><br>
 <img width="810" height="763" alt="image" src="https://github.com/user-attachments/assets/0764531a-c028-4184-97d8-a926bf29dba6" /><br>
 <img width="831" height="811" alt="image" src="https://github.com/user-attachments/assets/193d07d3-dc19-4b49-9402-35d04f833f6b" /><br>
 
-13.Branching
-Cmd: a. git switch -c <branch name> OR git checkout -b <branch name> <b>Used to create new branch and switch to it immmediately after creation.</b> <br>
-b. git push --set-upstream origin <branch name> <b> Used to set the create branch upstream and push it to remote repo along with whatever changes made in it. Before this commit and add commands to be run.</b> <br>
-c. git checkout <branch_name> OR git switch <branch name> <b>Used to switch to existing branch </b><br>
-d. git branch -m <current branch name> <b>Used to rename current branch. Name chnage is for local. If </b> <br>
-e. git branch -m <old name> <new name> <b> Used to rename a spacific branch</b> <br>
-f. git branch -a <b> List out branches in remote repo </b> <br>
-g. git branch -d <b> Deletes local branch </b> <br>
-h. git branch -D <b> Deletes local branch forcefully </b> <br>
-i. git push origin --delete <branch name> <b>Deletes branch from remote repo </b><br>
+13.Branching<br>
+Cmd: a. git switch -c <branch name> OR git checkout -b |branch name| <b>(Used to create new branch and switch to it immmediately after creation.)</b> <br>
+b. git push --set-upstream origin |branch name| <b> (Used to set the create branch upstream and push it to remote repo along with whatever changes made in it. Before this commit and add commands to be run.)</b> <br>
+c. git checkout |branch_name| OR git switch |branch name| <b>(Used to switch to existing branch )</b><br>
+d. git branch -m |current branch name| <b>(Used to rename current branch.) </b> <br>
+e. git branch -m |old name| |new name| <b> (Used to rename a spacific branch)</b> <br>
+f. git branch -a <b> (List out branches in remote repo) </b> <br>
+g. git branch -d <b> (Deletes local branch )</b> <br>
+h. git branch -D <b> (Deletes local branch forcefully) </b> <br>
+i. git push origin --delete <branch name> <b>(Deletes branch from remote repo) </b><br>
 Notes: Renaming branch only renames it in local repo, not the remote repo. To change in remote repo also push the current renamed branch to remote using <b>git push -u origin <nre name branch></b> Then, delete the old branch from remote repo with <b>git push origin --delete <old branch name> </b>. This is how renaming will work in remote repo.
 <img width="835" height="622" alt="image" src="https://github.com/user-attachments/assets/48b1025b-8bb5-44e6-b229-048c8defe141" /><br>
 <img width="1004" height="579" alt="image" src="https://github.com/user-attachments/assets/9b32d05d-e2d5-421a-9d8e-9c06fabce69b" /><br>
@@ -101,11 +101,11 @@ Cmd:
 Notes:
 
 15.  Revert.<br>
-Cmd: a. git revert <commit hash><br>
-b. git revert -n <commit hash><br>
-c. git revert --no-edit <commit hash> AND git commit --allow-empty -m "Revert 675af5c (no-op after conflict resolution)"<br>
-d. git revert <commit hash old>..<commit hash new> OR git revert -n <commit hash of old commit>..HEAD <br> 
-e. git revert -m <parent id> <commit hash of merge commit> <br>
+Cmd: a. git revert |commit hash|<br>
+b. git revert -n |commit hash|<br>
+c. git revert --no-edit |commit hash| AND git commit --allow-empty -m "Revert 675af5c (no-op after conflict resolution)"<br>
+d. git revert |commit hash old|..|commit hash new| OR git revert -n |commit hash of old commit|..HEAD <br> 
+e. git revert -m |parent id| |commit hash of merge commit| <br>
 Notes: Git revert is used when you want to have a specific commit version of a code without actually moving the HEAD pointer to the version. So if commits are A->B->C and you want to have commit B version of code then use revert and we get A->B->c-C'. This new commit C' is equivalent to B. It reverses all the changes made in code duing C commit. If commits are A->B->C->D and after D revert command to B is run then commit will be A->B->C->D->D' and this D' will be reverse of B. However, changes in C will sustain coz we wanted reversal to B. Merge conflicts can occur in this case and thus can be resolved maully in editor and then git revert --continue can be used futher to complete the revert process. Also, if you want to revert range of commit like D and C both reverting to B then use the c.) command that reverts all changes of D and C to B creating a new commit CD' (A->B->C->D->CD' where CD' is reverted version of B). -n attribute is to skip the git commit entirely. Revert happens but again after this revert command you have to manually do a git add and git commit and then git push commands to actually create a commit. --no-edit attribute is used when we want to skip the commit message. So by default the commit is done with commit message as "Revert <commit msg of commit which we revert>". If A->B->C and we reverted to B from C using --no-edit, "xyz" being commit message of B then we have A->B->C->C' with commit message of C' as "Revert xyz". This achieved by the second --alow-empty attribute command. -m is used when we have branches. If A->B are commits in main brnach and X->Y are commits in branch named pqr and the merge commit of main and pqr is M, then M has 2 parents B and Y. To revert to any one from M we have to use git show command onto M commit to get the number/ID of the intended parent. Suppose 1 is parent ID of A->B and 2 is of X->Y then git revert -m 1 <hashOfM> reverts it to B while  git revert -m 2 <hashOfM> reverts it to Y. <b> Safest one to use is -n. Coz of after this you can do a commit yourself</b>
 (This is the initial 4 commits (Revert A,B,C,D)):
 <img width="885" height="618" alt="image" src="https://github.com/user-attachments/assets/6a28b332-cd6c-4e1b-8d7d-8f64d96bfba1" /><br>
