@@ -64,7 +64,7 @@ Notes: Commit history is provided in reverse chronological order(last to first).
 <img width="1116" height="706" alt="image" src="https://github.com/user-attachments/assets/9c7acc1e-9680-464b-9da5-637405bb47a2" /><br>
 
 11. Checking out a commit<br>
-Cmd: git show |commit hash|<br>
+Cmd: git show |commit hash| <br>
 Notes: Author, date, lines added and deleted line of code, all is shown for the particular commit.<br>
 <img width="615" height="390" alt="image" src="https://github.com/user-attachments/assets/2949707b-2dc7-48e5-aacc-b1ca0c4cb67a" /><br>
 
@@ -128,7 +128,7 @@ Range revert:
 
 
 17. Remove from git directory (local one).<br>
-Cmd:git rm <filename><br>
+Cmd:git rm |filename|<br>
 Notes: Removes the file from the intitiated git working directory/tree. This file won't be staged/commited and thus not pushed to remote repo.<br>
 
 
