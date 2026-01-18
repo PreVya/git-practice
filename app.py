@@ -24,3 +24,4 @@ if __name__ =="__main__":
     print("--- IGNORE ---")
     print("This is to test revert git command")
     print("Revert 0")
+    print("This is new brnach features")
