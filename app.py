@@ -1,6 +1,4 @@
 from auth import authenticate
-from users import users
-from admin import admin
 
 def main():
     print("This is git and github practice.")
@@ -27,7 +25,3 @@ if __name__ =="__main__":
     print("This is to test revert git command")
     print("Revert 0")
     print("This is new brnach features")
-
-    for user in users:
-        access = admin(user)
-        print(f"User: {user}, Access Level: {access}")
