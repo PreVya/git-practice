@@ -57,7 +57,7 @@ Cmd: a. git log<br>
 b. git log --oneline<br>
 c. git log --stat
 d. git log -p
-d. git log --graph
+d. git log --graph OR git log --graph --all
 Notes: Commit history is provided in reverse chronological order(last to first). Logs provide the info about author, date and time, commit message and hash(40 character SHA-1 ID) of the commit. --online attribute gives commit message and hash for all commits in one line each. --stat attribute will show changes , insertions and deletions during each commit. -p displays actual code changes for each commit. --graph displays a tree to understand commit history and branching and merges. <br>
 <img width="1039" height="708" alt="image" src="https://github.com/user-attachments/assets/cca6dd66-e716-4942-93c5-5e96833276d2" /><br>
 <img width="1066" height="761" alt="image" src="https://github.com/user-attachments/assets/80918c25-4fc5-4611-b3ae-ed36b6581cc8" /><br>
@@ -80,27 +80,61 @@ Notes: Reset means moving the HEAD pointer to a previous commit. Moreover, it is
 <img width="831" height="811" alt="image" src="https://github.com/user-attachments/assets/193d07d3-dc19-4b49-9402-35d04f833f6b" /><br>
 
 13.Branching
+Cmd: a. git switch -c <branch name> OR git checkout -b <branch name> <b>Used to create new branch and switch to it immmediately after creation.</b> <br>
+b. git push --set-upstream origin <branch name> <b> Used to set the create branch upstream and push it to remote repo along with whatever changes made in it. Before this commit and add commands to be run.</b> <br>
+c. git checkout <branch_name> OR git switch <branch name> <b>Used to switch to existing branch </b><br>
+d. git branch -m <current branch name> <b>Used to rename current branch. Name chnage is for local. If </b> <br>
+e. git branch -m <old name> <new name> <b> Used to rename a spacific branch</b> <br>
+f. git branch -a <b> List out branches in remote repo </b> <br>
+g. git branch -d <b> Deletes local branch </b> <br>
+h. git branch -D <b> Deletes local branch forcefully </b> <br>
+i. git push origin --delete <branch name> <b>Deletes branch from remote repo </b><br>
+Notes: Renaming branch only renames it in local repo, not the remote repo. To change in remote repo also push the current renamed branch to remote using <b>git push -u origin <nre name branch></b> Then, delete the old branch from remote repo with <b>git push origin --delete <old branch name> </b>. This is how renaming will work in remote repo.
+<img width="835" height="622" alt="image" src="https://github.com/user-attachments/assets/48b1025b-8bb5-44e6-b229-048c8defe141" /><br>
+<img width="1004" height="579" alt="image" src="https://github.com/user-attachments/assets/9b32d05d-e2d5-421a-9d8e-9c06fabce69b" /><br>
+<img width="598" height="149" alt="image" src="https://github.com/user-attachments/assets/b66b00b1-50db-47b3-8f6c-78dbba3f1858" /><br>
+<img width="827" height="727" alt="image" src="https://github.com/user-attachments/assets/e3d8a1d0-97b7-4942-a77f-5c0c6b5790cd" /><br>
+<img width="487" height="154" alt="image" src="https://github.com/user-attachments/assets/22778ef0-fc31-4716-af37-c16adeb3b76f" /><br>
 
-14. Revert.<br>
+14. Merging the brnaches and rebasing in different branches.
+Cmd: 
+Notes:
+
+15.  Revert.<br>
 Cmd: a. git revert <commit hash><br>
 b. git revert -n <commit hash><br>
-c. git revert --no-edit <commit hash><br>
+c. git revert --no-edit <commit hash> AND git commit --allow-empty -m "Revert 675af5c (no-op after conflict resolution)"<br>
 d. git revert <commit hash old>..<commit hash new> OR git revert -n <commit hash of old commit>..HEAD <br> 
 e. git revert -m <parent id> <commit hash of merge commit> <br>
-Notes: Git revert is used when you want to have a specific commit version of a code without actually moving the HEAD pointer to the version. So if commits are A->B->C and you want to have commit B version of code then use revert and we get A->B->c-C'. This new commit C' is equivalent to B. It reverses all the changes made in code duing C commit. If commits are A->B->C->D and after D revert command to B is run then commit will be A->B->C->D->D' and this D' will be reverse of B. However, changes in C will sustain coz we wanted reversal to B. Merge conflicts can occur in this case and thus can be resolved maully in editor and then git revert --continue can be used futher to complete the revert process. Also, if you want to revert range of commit like D and C both reverting to B then use the c.) command that reverts all changes of D and C to B creating a new commit CD' (A->B->C->D->CD' where CD' is reverted version of B). -n attribute is to skip the git commit entirely. Revert happens but again after this revert command you have to manually do a git add and git commit and then git push commands to actually create a commit. --no-edit attribute is used when we want to skip the commit message. So by default the commit is done with commit message as "Revert <commit msg of commit which we revert>". If A->B->C and we reverted to B from C using --no-edit, "xyz" being commit message of B then we have A->B->C->C' with commit message of C' as "Revert xyz". -m is used when we have branches. If A->B are commits in main brnach and X->Y are commits in branch named pqr and the merge commit of main and pqr is M, then M has 2 parents B and Y. To revert to any one from M we have to use git show command onto M commit to get the number/ID of the intended parent. Suppose 1 is parent ID of A->B and 2 is of X->Y then git revert -m 1 <hashOfM> reverts it to B while  git revert -m 2 <hashOfM> reverts it to Y. 
+Notes: Git revert is used when you want to have a specific commit version of a code without actually moving the HEAD pointer to the version. So if commits are A->B->C and you want to have commit B version of code then use revert and we get A->B->c-C'. This new commit C' is equivalent to B. It reverses all the changes made in code duing C commit. If commits are A->B->C->D and after D revert command to B is run then commit will be A->B->C->D->D' and this D' will be reverse of B. However, changes in C will sustain coz we wanted reversal to B. Merge conflicts can occur in this case and thus can be resolved maully in editor and then git revert --continue can be used futher to complete the revert process. Also, if you want to revert range of commit like D and C both reverting to B then use the c.) command that reverts all changes of D and C to B creating a new commit CD' (A->B->C->D->CD' where CD' is reverted version of B). -n attribute is to skip the git commit entirely. Revert happens but again after this revert command you have to manually do a git add and git commit and then git push commands to actually create a commit. --no-edit attribute is used when we want to skip the commit message. So by default the commit is done with commit message as "Revert <commit msg of commit which we revert>". If A->B->C and we reverted to B from C using --no-edit, "xyz" being commit message of B then we have A->B->C->C' with commit message of C' as "Revert xyz". This achieved by the second --alow-empty attribute command. -m is used when we have branches. If A->B are commits in main brnach and X->Y are commits in branch named pqr and the merge commit of main and pqr is M, then M has 2 parents B and Y. To revert to any one from M we have to use git show command onto M commit to get the number/ID of the intended parent. Suppose 1 is parent ID of A->B and 2 is of X->Y then git revert -m 1 <hashOfM> reverts it to B while  git revert -m 2 <hashOfM> reverts it to Y. <b> Safest one to use is -n. Coz of after this you can do a commit yourself</b>
+(This is the initial 4 commits (Revert A,B,C,D)):
+<img width="885" height="618" alt="image" src="https://github.com/user-attachments/assets/6a28b332-cd6c-4e1b-8d7d-8f64d96bfba1" /><br>
+<img width="873" height="253" alt="image" src="https://github.com/user-attachments/assets/90730aa0-b2ef-4f7d-a42e-83cdc80285f2" /><br>
+--no-edit revert:
+<img width="896" height="727" alt="image" src="https://github.com/user-attachments/assets/7ef508b9-3677-49b7-a592-f070723c7fb0" /><br>
+(After this do git commit --allow-empty -m "Revert msg")
+<img width="715" height="541" alt="image" src="https://github.com/user-attachments/assets/fd649536-0a96-4e4e-965a-6976be290312" /><br>
+Range revert:
+<img width="757" height="780" alt="image" src="https://github.com/user-attachments/assets/886ecfa9-5e9e-455a-be8f-21082571f424" /><br>
+<img width="1141" height="324" alt="image" src="https://github.com/user-attachments/assets/cf4a1f5a-53c7-4097-95c8-868e8daf350b" /><br>
+<img width="881" height="917" alt="image" src="https://github.com/user-attachments/assets/a110dbe4-8505-4e80-a6a3-59c7826b8e03" /><br>
 
 
 
 
 
-15. Remove from git directory (local one).<br>
+
+
+
+
+17. Remove from git directory (local one).<br>
 Cmd:git rm <filename><br>
 Notes: Removes the file from the intitiated git working directory/tree. This file won't be staged/commited and thus not pushed to remote repo.<br>
 
 
-16. Squashing
+18. Squashing
     
-17.Stashing <br>
+18.Stashing <br>
 Cmd: a. git stash<br>
 b. git stash list<br
 c. git stash apply OR git stash apply stash@{n} (n is the ID of stash 1,2,3,4..etc)<br>
