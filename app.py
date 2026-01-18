@@ -36,3 +36,4 @@ if __name__ =="__main__":
     print("This is for interactive rebasing")
     print("Commmit A for interactive rebase")
     print("Commit B for interactive rebase")
+    print("Commit C for interactive rebase")
