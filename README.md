@@ -97,8 +97,26 @@ Notes: Renaming branch only renames it in local repo, not the remote repo. To ch
 <img width="487" height="154" alt="image" src="https://github.com/user-attachments/assets/22778ef0-fc31-4716-af37-c16adeb3b76f" /><br>
 
 14. Merging the brnaches and rebasing in different branches.
-Cmd: 
-Notes:
+Cmd: a. git switch |branch into which merging to be done| AND git merge |branch to be merged| OR git merge |branch to be merged| --ff-only<br>
+b. git switch |branch into which merging to be done| AND git merge |branch to be merged| (Followed by git add .,git commit -m and git push)
+c. git checkout |brach to be merged| AND git rebase |branck into which merging is done| AND git checkout |branch into which merging is done| AND git merge |branch to be merged|(Ex: feature branch to be merged in main then command flow is : git checkout feature -> git rebase main -> git checkout main -> git merge feature)
+Notes: a. is called as fast forward merge and the a. command is done when branch to be merged, is predecessor of the brnach into which merging is to be done. Ex: main and feature are to be merged and feature is to be merged into main. Main is A->B->C and feature is X->Y while C being the ancestor of X and so after merge linear graph is formed: A->B->C->X->Y. Do git log --graph to understand this before and after merge. Moreover, git brancg -a command will still show a separate feature brnach, but code chnages will be seen as code from Y will be completely visible onto main branch. But suppose X does not have any immediate ancestor i.e. after branching out from commit C, there were more commits to main branch say D->E->F , then a simple merge and merge commit is created. This is the command b.. In this case, merge conflicts arise and are to be solved using the merge editor, and then do a simple <b>git merge --continue</b> Last but not least comes the rebasing of branches. When we have A->B-C->D as commits on main branch and X->Y on feature where the feature branched out of main from commit C and we want to merge feature into main without a merge commit thne we first rebase the feature branch to make D as X commit's ancestor and then we do fast forward merge. After rebasing it becomes A->B-C->D->X'->Y' and where X' and Y' are still at feature branch only and then after fast forward merge linearity is achieved. If there is merge conflict while rebasing then resolev in editor , then do a manual commit and then <b> git rebase --continue </b> and then checkout to main branch and merge feature branch. New commit willot be visible coz fast forward merge does not create any commit. But a linear gharph i seen
+(Fast forward merge):
+<img width="772" height="563" alt="image" src="https://github.com/user-attachments/assets/0e2f67c4-c909-4382-994b-3d5c9d0c5c85" /><br>
+<img width="636" height="117" alt="image" src="https://github.com/user-attachments/assets/d5fb7ad7-286c-4c55-aa79-9b1e8e8b6501" /><br>
+<img width="646" height="107" alt="image" src="https://github.com/user-attachments/assets/613a5c7f-8c3d-4c8c-a94d-f05629ced211" /><br>
+<img width="944" height="667" alt="image" src="https://github.com/user-attachments/assets/44b811fa-ea98-4b5b-ab61-d515982d4031" /><br>
+(Simple merge)
+<img width="860" height="535" alt="image" src="https://github.com/user-attachments/assets/d899d864-a446-4996-8a67-5a0e0eddf7c4" /><br>
+<img width="881" height="221" alt="image" src="https://github.com/user-attachments/assets/68b6fde1-c333-4327-8417-ad80075282a2" /><br>
+Final graph:
+<img width="881" height="754" alt="image" src="https://github.com/user-attachments/assets/326eca23-f7f3-465a-af79-b117c5c15193" /><br>
+Rebasing and then fastforward merge.
+<img width="920" height="882" alt="image" src="https://github.com/user-attachments/assets/abe2509e-0ce8-4649-8da5-e12e75190610" /><br>
+<img width="751" height="268" alt="image" src="https://github.com/user-attachments/assets/1d49300f-ce03-4c89-a008-784943faf775" /><br>
+<img width="799" height="357" alt="image" src="https://github.com/user-attachments/assets/1aba1e60-8414-4116-bfb0-cf2f1cb6b8b3" /><br>
+<img width="716" height="274" alt="image" src="https://github.com/user-attachments/assets/05df948e-c4de-4483-b569-ff34884e8f64" /><br>
+
 
 15.  Revert.<br>
 Cmd: a. git revert |commit hash|<br>
@@ -106,34 +124,52 @@ b. git revert -n |commit hash|<br>
 c. git revert --no-edit |commit hash| AND git commit --allow-empty -m "Revert 675af5c (no-op after conflict resolution)"<br>
 d. git revert |commit hash old|..|commit hash new| OR git revert -n |commit hash of old commit|..HEAD <br> 
 e. git revert -m |parent id| |commit hash of merge commit| <br>
-Notes: Git revert is used when you want to have a specific commit version of a code without actually moving the HEAD pointer to the version. So if commits are A->B->C and you want to have commit B version of code then use revert and we get A->B->c-C'. This new commit C' is equivalent to B. It reverses all the changes made in code duing C commit. If commits are A->B->C->D and after D revert command to B is run then commit will be A->B->C->D->D' and this D' will be reverse of B. However, changes in C will sustain coz we wanted reversal to B. Merge conflicts can occur in this case and thus can be resolved maully in editor and then git revert --continue can be used futher to complete the revert process. Also, if you want to revert range of commit like D and C both reverting to B then use the c.) command that reverts all changes of D and C to B creating a new commit CD' (A->B->C->D->CD' where CD' is reverted version of B). -n attribute is to skip the git commit entirely. Revert happens but again after this revert command you have to manually do a git add and git commit and then git push commands to actually create a commit. --no-edit attribute is used when we want to skip the commit message. So by default the commit is done with commit message as "Revert <commit msg of commit which we revert>". If A->B->C and we reverted to B from C using --no-edit, "xyz" being commit message of B then we have A->B->C->C' with commit message of C' as "Revert xyz". This achieved by the second --alow-empty attribute command. -m is used when we have branches. If A->B are commits in main brnach and X->Y are commits in branch named pqr and the merge commit of main and pqr is M, then M has 2 parents B and Y. To revert to any one from M we have to use git show command onto M commit to get the number/ID of the intended parent. Suppose 1 is parent ID of A->B and 2 is of X->Y then git revert -m 1 <hashOfM> reverts it to B while  git revert -m 2 <hashOfM> reverts it to Y. <b> Safest one to use is -n. Coz of after this you can do a commit yourself</b>
-(This is the initial 4 commits (Revert A,B,C,D)):
+Notes: Git revert is used when you want to have a specific commit version of a code without actually moving the HEAD pointer to the version. So if commits are A->B->C and you want to have commit B version of code then use revert and we get A->B->c-C'. This new commit C' is equivalent to B. It reverses all the changes made in code duing C commit. If commits are A->B->C->D and after D revert command to B is run then commit will be A->B->C->D->D' and this D' will be reverse of B. However, changes in C will sustain coz we wanted reversal to B. Merge conflicts can occur in this case and thus can be resolved maully in editor and then git revert --continue can be used futher to complete the revert process. Also, if you want to revert range of commit like D and C both reverting to B then use the c.) command that reverts all changes of D and C to B creating a new commit CD' (A->B->C->D->CD' where CD' is reverted version of B). -n attribute is to skip the git commit entirely. Revert happens but again after this revert command you have to manually do a git add and git commit and then git push commands to actually create a commit. --no-edit attribute is used when we want to skip the commit message. So by default the commit is done with commit message as "Revert |commit msg of commit which we revert|". If A->B->C and we reverted to B from C using --no-edit, "xyz" being commit message of B then we have A->B->C->C' with commit message of C' as "Revert xyz". This achieved by the second --alow-empty attribute command. -m is used when we have branches. If A->B are commits in main brnach and X->Y are commits in branch named pqr and the merge commit of main and pqr is M, then M has 2 parents B and Y. To revert to any one from M we have to use git show command onto M commit to get the number/ID of the intended parent. Look gor line Merge: |commitHash1| |commitHash2| where the commitHash1 will be of the parent 1 ie. the branch you were on while merge while commitHash2 is is the commit hash of the branch which was merged onto commitHash1 branch. So, if you merged branch named feature into main then commitHash1 id of main and commitHsh2 is of feature branch and thus parent ID of main becomes 1 and that of feature becomes 2. In our case now, suppose 1 is parent ID of A->B and 2 is of X->Y then git revert -m 1 <hashOfM> reverts it to B while  git revert -m 2 <hashOfM> reverts it to Y. <b> Note! Safest attribute of revert  to use is -n. Coz after this you can do a commit yourself</b>
+(This is the initial 4 commits (Revert A,B,C,D)):<br>
 <img width="885" height="618" alt="image" src="https://github.com/user-attachments/assets/6a28b332-cd6c-4e1b-8d7d-8f64d96bfba1" /><br>
 <img width="873" height="253" alt="image" src="https://github.com/user-attachments/assets/90730aa0-b2ef-4f7d-a42e-83cdc80285f2" /><br>
---no-edit revert:
+--no-edit revert:<br>
 <img width="896" height="727" alt="image" src="https://github.com/user-attachments/assets/7ef508b9-3677-49b7-a592-f070723c7fb0" /><br>
-(After this do git commit --allow-empty -m "Revert msg")
+(After this do git commit --allow-empty -m "Revert msg")<br>
 <img width="715" height="541" alt="image" src="https://github.com/user-attachments/assets/fd649536-0a96-4e4e-965a-6976be290312" /><br>
-Range revert:
+Range revert:<br>
 <img width="757" height="780" alt="image" src="https://github.com/user-attachments/assets/886ecfa9-5e9e-455a-be8f-21082571f424" /><br>
 <img width="1141" height="324" alt="image" src="https://github.com/user-attachments/assets/cf4a1f5a-53c7-4097-95c8-868e8daf350b" /><br>
 <img width="881" height="917" alt="image" src="https://github.com/user-attachments/assets/a110dbe4-8505-4e80-a6a3-59c7826b8e03" /><br>
+Merge revert:<br>
+<img width="909" height="666" alt="image" src="https://github.com/user-attachments/assets/1babe0ed-673c-4b9d-93d1-715b35dfce52" /><br>
+<img width="988" height="301" alt="image" src="https://github.com/user-attachments/assets/92c5b72c-8acd-4aa4-8c26-79306413a488" /><br>
+<img width="889" height="274" alt="image" src="https://github.com/user-attachments/assets/4a7f22df-3db4-40d5-a3b5-22945da90e8c" /><br>
 
 
 
 
 
-
-
-
-
-17. Remove from git directory (local one).<br>
+16. Remove from git directory (local one).<br>
 Cmd:git rm |filename|<br>
 Notes: Removes the file from the intitiated git working directory/tree. This file won't be staged/commited and thus not pushed to remote repo.<br>
 
 
-18. Squashing
-    
+17. Squashing and interactive rebasing, and fixup<br>
+Cmd: a. git rebase -i |commitHash| <br>
+b. git checkout |branch in into whoch merge will happen| AND git merge --squash |branch to be merged|<br>
+Notes: Squashing means to combine one or more commits into one. Helps to curb number of commits in limit. This is achieved by rebasing and that too in interactive mode. An older commit squashes the further commits into it. Suppose you have A->B->C->D->E and you want to squash all commits into B then use a. command and an interactive rebase opens an editor and now chnage all the "pick" words to "squash" for the commits you want to squash into B. Then save and exit. Then enter the combined commit message in another editor already open and then save and exit it.Trick here is when you want to squash into B , you have to give the commit hash of commit A while entering the interactvive rebase : git rebase - i |commitHashOfA| and then the rest 4 B,C,D,E commits will appear in the editor where you squash C,D,E into E and so chnage the "pick" to "squash" for only C,D,E commits not the B. B remains "pick". You can also squash and mearge a branch into another. b. command is used. However, here merge commit is not created, so log does not show it. In fixup, instead of "squash" you write "fixup" in the interactive editor file opened after command <b>git rebase -i |commitHash|</b>. Fixup combines the commits but it does not give a new commit message to combined commits, but the parent's commit message is carried forward. Ex: We have A->B-C->D->E commits and we give command git rebase -i |commitHashOfA| then in editor we will have commits with pick word prefixed to commit B,C,D,E. We chnage "pick" to "fixup" for C,D,E commits. Once we close and exit then the ommit message of B will be commit message after fixup.
+Rebase and squash:<br>
+<img width="791" height="433" alt="image" src="https://github.com/user-attachments/assets/26ecf177-1a46-4bad-b825-f4861de8acd4" /><br>
+<img width="844" height="148" alt="image" src="https://github.com/user-attachments/assets/853ada08-d8d7-429f-bb0d-9f2a66108e0e" /><br>
+<img width="799" height="764" alt="image" src="https://github.com/user-attachments/assets/09ba46cb-65b1-40ed-8dec-bf34829bd953" /><br>
+<img width="803" height="761" alt="image" src="https://github.com/user-attachments/assets/1fd9b5de-3edf-48a2-a2cf-0429388bd0e5" /><br>
+<img width="642" height="157" alt="image" src="https://github.com/user-attachments/assets/ae4b586a-d61b-46e0-8dc0-85bc4b75569f" /><br>
+<img width="729" height="151" alt="image" src="https://github.com/user-attachments/assets/03a1585e-19d9-45b9-9944-cdc6d6dd0793" /><br>
+Squash branch:<br>
+<img width="843" height="465" alt="image" src="https://github.com/user-attachments/assets/c018610c-8158-4730-92a2-05acdfa3791e" /><br>
+Fixup:<br>
+<img width="732" height="144" alt="image" src="https://github.com/user-attachments/assets/e656fb65-fc49-4b08-8553-78cb7bda10fd" /><br>
+<img width="916" height="744" alt="image" src="https://github.com/user-attachments/assets/7351a599-adc4-4fac-bf5a-15050cad549a" /><br>
+<img width="702" height="180" alt="image" src="https://github.com/user-attachments/assets/0ab8c9a4-156e-4033-8098-70d80f69a1c7" /><br>
+
+
+
 18.Stashing <br>
 Cmd: a. git stash<br>
 b. git stash list<br
@@ -156,7 +192,15 @@ Notes: If you do not want to commit your code to directory but still save it for
 
 
 
-
+19. Common git config commands:<br>
+a. git config --global --list <b>To check the global git config</b><br>
+b. git config --global user.name |your username| <b> To set the username globally for git onto machine</b><br>
+c. git conig --global user.name <b> If you have already set user name and want to check it what it is then use this</b><br>
+d. git config --global user.email |your email| <b>To set user email globally for git onto machine </b><br>
+e. git config --global user.email <b>If you have already set user email and want to check what it is</b><br>
+f.git config --global core.editor |editor name like vim/nano| <b>To set the editor for git. Useful in commands like interactive rebase</b><br>
+g. git config --global color.ui auto <b>To enable coloured UI for git output</b><br>
+h. git config --global alias.|shortcut| "git command for which shortform stands" <b> Useful to create shortcuts for very long commands.Ex: git config --global alias.lg "git log --graph --oneline --all". So now you have to put <i>git lg</i> when ever you want log in graph format or want to basically run git log --graph --oneline --all command.
 
 
 THE 4 Rs in git
