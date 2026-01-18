@@ -1,5 +1,5 @@
 from auth import authenticate
-
+from manage import manage
 def main():
     print("This is git and github practice.")
     print("Version 1.0.0")
@@ -25,3 +25,9 @@ if __name__ =="__main__":
     print("This is to test revert git command")
     print("Revert 0")
     print("This is new brnach features")
+
+    print("Are you an admin?")
+    if manage(user):
+        print("Access granted to admin features.")
+    else:
+        print("Access denied. Admins only.")
