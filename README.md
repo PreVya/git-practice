@@ -203,8 +203,8 @@ g. git config --global color.ui auto <b>To enable coloured UI for git output</b>
 h. git config --global alias.|shortcut| "git command for which shortform stands" <b> Useful to create shortcuts for very long commands.Ex: git config --global alias.lg "git log --graph --oneline --all". So now you have to put <i>git lg</i> when ever you want log in graph format or want to basically run git log --graph --oneline --all command.
 
 
-THE 4 Rs in git
-(Revert -> REvert to a commit or range of commit without losing the commit history
-Rebase -> Forgot to pull before push or rebase the commit history.
-Restore -> Remove from stating area. Unstage the changes
-Reset-> Reset the commit history and go to desired commit. Also, squash multiple commits to one. History is deleted and prolly as per commands new commit is created)
+THE 4 Rs in git:<br>
+(Revert -> REvert to a commit or range of commit without losing the commit history<br>
+Rebase -> Forgot to pull before push or rebase the commit history.<br>
+Restore -> Remove from stating area. Unstage the changes<br>
+Reset-> Reset the commit history and go to desired commit. Also, squash multiple commits to one. History is deleted and prolly as per commands new commit is created)<br>
