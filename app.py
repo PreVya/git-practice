@@ -31,3 +31,5 @@ if __name__ =="__main__":
         print("Access granted to admin features.")
     else:
         print("Access denied. Admins only.")
+
+    print("Will do interactive rebase and squash commits and fixuop commits")
