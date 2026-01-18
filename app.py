@@ -33,3 +33,10 @@ if __name__ =="__main__":
         print("Access denied. Admins only.")
 
     print("Will do interactive rebase and squash commits and fixuop commits")
+    print("This is for interactive rebasing")
+    print("Commmit A for interactive rebase")
+    print("Commit B for interactive rebase")
+    print("Commit C for interactive rebase")
+    print("Commit D for interactive rebase")
+
+    print("Fixup A")
