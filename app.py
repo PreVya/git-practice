@@ -1,4 +1,5 @@
 from auth import authenticate
+from users import users
 
 def main():
     print("This is git and github practice.")
@@ -17,7 +18,3 @@ if __name__ =="__main__":
     for user in users:
         permissions = users(user)
         print(f"User: {user}, Permissions: {permissions}")
-    
-    print("The user role management system is operational.")
-    print("End of the program.")
-
