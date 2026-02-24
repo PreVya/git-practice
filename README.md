@@ -202,9 +202,18 @@ f.git config --global core.editor |editor name like vim/nano| <b>To set the edit
 g. git config --global color.ui auto <b>To enable coloured UI for git output</b><br>
 h. git config --global alias.|shortcut| "git command for which shortform stands" <b> Useful to create shortcuts for very long commands.Ex: git config --global alias.lg "git log --graph --oneline --all". So now you have to put <i>git lg</i> when ever you want log in graph format or want to basically run git log --graph --oneline --all command.
 
+20. Chnging the origin of a repo to push another cloned repo to your github repo (THIS IS GITHUB MORE THAN UST GIT)<br>
+Cmd: a. git remote -v <br>
+b. git remote set-url |url-of-our repo Ex: https://github.com/PreVya/fastapi_react_todo.git| <br>
+When you want to minimize your work of copying a repo code, you can clone and change its origin to a new origin. Fetch the actual origin of the code/repo using <b>git remote -v</b> command. Create a repo in your github and copy the .git url. Then run <b>git remote set-url |.git url|</b> to the code to your repo. Later use basic add, commit and push commands to actually commit and push. <br>
+
+<img width="1277" height="291" alt="Screenshot from 2026-02-24 17-10-59" src="https://github.com/user-attachments/assets/254f492c-c079-4a2b-84e8-b1adf61bfdcd" /> <br>
+<img width="1277" height="249" alt="image" src="https://github.com/user-attachments/assets/c1037db3-f121-4461-a324-2ea9b8f4e705" /> <br>
+
+
 
 THE 4 Rs in git:<br>
-(Revert -> REvert to a commit or range of commit without losing the commit history<br>
+(Revert -> Revert to a commit or range of commit without losing the commit history<br>
 Rebase -> Forgot to pull before push or rebase the commit history.<br>
 Restore -> Remove from stating area. Unstage the changes<br>
 Reset-> Reset the commit history and go to desired commit. Also, squash multiple commits to one. History is deleted and prolly as per commands new commit is created)<br>
